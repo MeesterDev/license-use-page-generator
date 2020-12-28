@@ -1,0 +1,32 @@
+{
+  "name": "meesterdev/os-license-page-generator",
+  "description": "A utility to create an open source licenses page",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas Meester",
+      "homepage": "https://meester.dev/"
+    }
+  ],
+  "homepage": "https://meester.dev/",
+  "require": {
+    "laravel/framework": "^7.0|^8.0",
+    "ext-json": "*",
+    "league/commonmark": "^1.5",
+    "meesterdev/file-wrapper": "^0.0.1",
+    "meesterdev/package-parser": "^0.0.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "MeesterDev\\LicenseUseGenerator\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "MeesterDev\\LicenseUseGenerator\\LicenseUseGeneratorServiceProvider"
+      ]
+    }
+  }
+}
