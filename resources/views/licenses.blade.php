@@ -133,7 +133,7 @@
                             {{ $package->name }}
                         @endif
                     </h2>
-                    @if ($package->licenseFileLocation && $licenseHtml = \MeesterDev\LicenseUseGenerator\Licenses\HtmlGenerator::getHtml($package->licenseFileLocation))
+                    @if ($package->licenseFileLocation && $licenseHtml = \MeesterDev\LicenseUsePageGenerator\Licenses\HtmlGenerator::getHtml($package->licenseFileLocation))
                         {!! $licenseHtml !!}
                     @elseif (\Illuminate\Support\Facades\View::exists('license-generator::licenses.' . str_replace('.', '_' , $package->licenseType)))
                         @include('license-generator::licenses.' . str_replace('.', '_' , $package->licenseType), ['package' => $package])

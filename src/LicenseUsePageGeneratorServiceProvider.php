@@ -1,11 +1,11 @@
 <?php
 
-namespace MeesterDev\LicenseUseGenerator;
+namespace MeesterDev\LicenseUsePageGenerator;
 
 use Illuminate\Support\ServiceProvider;
-use MeesterDev\LicenseUseGenerator\Commands\LicenseUseGenerateCommand;
+use MeesterDev\LicenseUsePageGenerator\Commands\LicenseUseGenerateCommand;
 
-class LicenseUseGeneratorServiceProvider extends ServiceProvider {
+class LicenseUsePageGeneratorServiceProvider extends ServiceProvider {
     public function boot() {
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'license-generator');
 

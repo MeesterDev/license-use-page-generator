@@ -1,6 +1,6 @@
 <?php
 
-namespace MeesterDev\LicenseUseGenerator\Commands;
+namespace MeesterDev\LicenseUsePageGenerator\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;

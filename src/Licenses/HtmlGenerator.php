@@ -1,6 +1,6 @@
 <?php
 
-namespace MeesterDev\LicenseUseGenerator\Licenses;
+namespace MeesterDev\LicenseUsePageGenerator\Licenses;
 
 use League\CommonMark\CommonMarkConverter;
 use MeesterDev\FileWrapper\File;
