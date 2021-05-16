@@ -6,13 +6,13 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use MeesterDev\FileWrapper\File;
 use MeesterDev\PackageParser\Entities\PackageInformation;
-use MeesterDev\PackageParser\Parsers\ParserFactory;
 use MeesterDev\PackageParser\Parsers\AbstractParser;
+use MeesterDev\PackageParser\Parsers\ParserFactory;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class LicenseUseGenerateCommand extends Command {
-    protected               $signature = 'license-page:generate {source* : Files to use as source. } {--keep-public-domain} {--title=} {--view=}';
+    protected               $signature = 'license-page:generate {source* : Files to use as source. } {--keep-public-domain} {--title=} {--view=} {--exclude=*}';
     private OutputFormatter $formatter;
 
     public function __construct() {
@@ -24,7 +24,7 @@ class LicenseUseGenerateCommand extends Command {
     public function handle() {
         $sources = collect($this->argument('source'));
 
-        $parsers  = $sources
+        $parsers = $sources
             ->map(
                 function (string $source) {
                     $parser = ParserFactory::createForFile(new File($source));
@@ -43,6 +43,17 @@ class LicenseUseGenerateCommand extends Command {
                 }
             )
             ->flatten()
+            ->filter(
+                function (PackageInformation $package): bool {
+                    foreach ($this->option('exclude') as $excluded) {
+                        if ($package->name === $excluded || $excluded[-1] === '/' && strncmp($excluded, $package->name, strlen($excluded)) === 0) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            )
             ->unique(
                 function (PackageInformation $package): string {
                     return $package->name . '|||' . $package->source . '|||' . $package->licenseType;
