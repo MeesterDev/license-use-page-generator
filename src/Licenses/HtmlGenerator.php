@@ -7,11 +7,17 @@ use MeesterDev\FileWrapper\File;
 
 class HtmlGenerator {
     private static function getSimpleLicense(File $file): string {
-        return view('license-generator::license', ['text' => $file->contents()]);
+        return static::getLicenseHtml($file->contents());
     }
 
     private static function getHtmlLicense(File $file): string {
-        return view('license-generator::license', ['text' => strip_tags($file->contents())]);
+        return static::getLicenseHtml(strip_tags($file->contents()));
+    }
+
+    private static function getLicenseHtml(string $text): string {
+        ob_start();
+        include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'license.php';
+        return ob_get_clean();
     }
 
     private static function getMarkdownLicense(File $file): string {
@@ -22,7 +28,7 @@ class HtmlGenerator {
             ]
         );
 
-        return $converter->convertToHtml($file->contents());
+        return $converter->convert($file->contents());
     }
 
     public static function getHtml(File $file): ?string {

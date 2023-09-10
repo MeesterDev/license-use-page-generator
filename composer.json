@@ -3,7 +3,7 @@
   "description": "A utility to adhere to open source licenses that require inclusion or mention of their usage and license by generating an HTML page containing a list of all used packages/libraries.",
   "minimum-stability": "stable",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": [
     {
       "name": "Thomas Meester",
@@ -12,17 +12,20 @@
   ],
   "homepage": "https://meester.dev/",
   "require": {
-    "laravel/framework": "^7.0|^8.0",
+    "php": ">=8.1",
     "ext-json": "*",
-    "league/commonmark": "^1.5",
-    "meesterdev/file-wrapper": "^0.0.1",
-    "meesterdev/package-parser": "^0.0.5"
+    "league/commonmark": "^2.4",
+    "meesterdev/file-wrapper": "^0.0.2",
+    "meesterdev/package-parser": "^1.0.1"
+  },
+  "suggest": {
+    "laravel/framework": "Required to run as an artisan command."
   },
   "autoload": {
     "psr-4": {
       "MeesterDev\\LicenseUsePageGenerator\\": "src"
     }
-  },
+},
   "extra": {
     "laravel": {
       "providers": [
